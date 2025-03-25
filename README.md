@@ -6,11 +6,13 @@ Thanks to the [course](https://www.youtube.com/playlist?list=PLMSb3cZXtIfptKdr56
 
 I trained three different tokenizers with varying vocabulary sizes. Here is a summary:
 
-| Version | Vocabulary Size | Training Time |
+| Version | Vocabulary size (*) | Training time |
 |---------|----------------|--------------|
 | Small   | 1,024          | 20 minutes   |
 | Base    | 16,384         | 6 hours      |
-| Large   | 32,768         | Still in training     |
+| Large   | 32,768         | Still in training |
+
+> (*) Vocabulary size does not include special tokens.
 
 The machine used for training has the following specifications:
 
@@ -44,6 +46,20 @@ If you need to add more or modify the current ones, just load the tokenizer and 
 The [AtlaSet](https://huggingface.co/datasets/atlasia/Atlaset) dataset contains around 900 million characters. Loading this much text uses all 16GB of RAM plus 4GB of swap memory. To avoid memory issues, I trained the tokenizer on just 10 million characters, hoping it would be enough to estimate the data distribution.
 
 Training on 500 million characters was possible, but large vocabulary sizes would require days to complete. From my tests, the base and large tokenizers perform well.
+
+## Inference
+
+To use one of the trained tokenizers, load the model and encode text as follows:  
+
+```python
+from minbpe import RegexTokenizer
+
+tokenizer = RegexTokenizer()
+tokenizer.load(model_file="./output/base/darija_tokenizer.model")
+
+tokens = tokenizer.encode("السلام لاباس؟")
+# tokens: [261, 4001, 4905, 330, 299]
+```
 
 ## Limitations
 
