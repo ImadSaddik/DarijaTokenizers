@@ -172,8 +172,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
-data/private/
-output/
-checkpoints/
-AtlaSetCombined.txt
