@@ -22,6 +22,23 @@ The machine used for training has the following specifications:
 
 The [minbpe](./minbpe/) folder contains scripts copied from [Andrej Karpathy's repo](https://github.com/karpathy/minbpe), as it is not available as a package. I made some modifications to these scripts. You can check the [train_tokenizer](./train_tokenizer.ipynb) notebook for usage instructions.
 
+## Special characters
+
+I have used these special characters during training:
+
+```python
+max_vocab_id = list(tokenizer.vocab.keys())[-1]
+tokenizer.special_tokens = {
+    "<|startoftext|>": max_vocab_id + 1,
+    "<|separator|>": max_vocab_id + 2,
+    "<|endoftext|>": max_vocab_id + 3,
+    "<|unk|>": max_vocab_id + 4,
+    "<|padding|>": max_vocab_id + 5
+}
+```
+
+If you need to add more or modify the current ones, just load the tokenizer and update the `special_tokens` field.
+
 ## Challenges
 
 The [AtlaSet](https://huggingface.co/datasets/atlasia/Atlaset) dataset contains around 900 million characters. Loading this much text uses all 16GB of RAM plus 4GB of swap memory. To avoid memory issues, I trained the tokenizer on just 10 million characters, hoping it would be enough to estimate the data distribution.
