@@ -10,7 +10,7 @@ I trained three different tokenizers with varying vocabulary sizes. Here is a su
 |---------|----------------|--------------|
 | Small   | 1,024          | 20 minutes   |
 | Base    | 16,384         | 6 hours      |
-| Large   | 32,768         | Still in training |
+| Large   | 32,768         | 13 hours |
 
 > (*) Vocabulary size does not include special tokens.
 
